@@ -1,0 +1,1004 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Taller2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{\texorpdfstring{\textbf{TALLER PROGRAMACIÓN ENTERA
+MIXTA}}{TALLER PROGRAMACIÓN ENTERA MIXTA}}\label{taller-programaciuxf3n-entera-mixta}
+
+\subsection{Daniel Diaz - Alejandro
+Suarez}\label{daniel-diaz---alejandro-suarez}
+
+    \subsubsection{\texorpdfstring{1- \textbf{BREEDING
+MANUFACTURING}}{1- BREEDING MANUFACTURING}}\label{breeding-manufacturing}
+
+\paragraph{Restricciones:}\label{restricciones}
+
+\textbf{F.O:} Max z= 50x1 + 75x2
+
+3.6x1 + 4.8x2 \textless{}= 4800
+
+1.6x1 + 1.8x2 \textless{}= 1980
+
+0.6x1 + 0.6x2 \textless{}= 900
+
+x1 \textgreater{}= 300
+
+x2 \textgreater{}= 0 (evitar ventas negativas)
+
+x2 \textgreater{}= 180
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{ortools}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}solver} \PY{k}{import} \PY{n}{pywraplp}
+        
+        \PY{c+c1}{\PYZsh{} Instantiate a mixed\PYZhy{}integer solver, naming it SolveIntegerProblem.}
+        \PY{n}{solver} \PY{o}{=} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SolveIntegerProblem}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{CBC\PYZus{}MIXED\PYZus{}INTEGER\PYZus{}PROGRAMMING}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Define the variables}
+        
+        \PY{c+c1}{\PYZsh{} x1 and x2 are integer non\PYZhy{}negative variables.}
+        \PY{n}{x1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 3.6x1 + 4.8x2  \PYZlt{}= 4800}
+        \PY{n}{constraint1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4800}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{3.6}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{4.8}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 1.6x1 + 1.8x2 \PYZlt{}= 1980}
+        \PY{n}{constraint2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1980}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{1.6}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{1.8}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 0.6x1 + 0.6x2 \PYZlt{}= 900}
+        \PY{n}{constraint3} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{900}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} x1 \PYZgt{}= 300}
+        \PY{n}{constraint4} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} x2 \PYZgt{}= 180}
+        \PY{n}{constraint5} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{180}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Max z= 50x1 + 75x2.}
+        \PY{n}{objective} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetMaximization}\PY{p}{(}\PY{p}{)}
+        
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Solve the problem and print the solution.\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{n}{result\PYZus{}status} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Solve}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The problem has an optimal solution.}
+        \PY{k}{assert} \PY{n}{result\PYZus{}status} \PY{o}{==} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{OPTIMAL}
+        
+        \PY{c+c1}{\PYZsh{} The solution looks legit (when using solvers other than}
+        \PY{c+c1}{\PYZsh{} GLOP\PYZus{}LINEAR\PYZus{}PROGRAMMING, verifying the solution is highly recommended!).}
+        \PY{k}{assert} \PY{n}{solver}\PY{o}{.}\PY{n}{VerifySolution}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of variables =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumVariables}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of constraints =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumConstraints}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} The objective value of the solution.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Optimal objective value = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{Value}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The value of each variable in the solution.}
+        \PY{n}{variable\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{variable\PYZus{}list}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{variable}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{variable}\PY{o}{.}\PY{n}{solution\PYZus{}value}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of variables = 2
+Number of constraints = 5
+Optimal objective value = 73125
+x1 = 300
+x2 = 775
+
+    \end{Verbatim}
+
+    \subsubsection{\texorpdfstring{2- \textbf{SAINT GENERAL
+HOSPITAL.}}{2- SAINT GENERAL HOSPITAL.}}\label{saint-general-hospital.}
+
+\paragraph{Restricciones:}\label{restricciones}
+
+Nota: 16 onzas en cada libra.
+
+\textbf{F.O:} Min z= 0.375x1 + 0.50x2 (6.00/16 + 8.00/16) costo
+
+100x1 + 100x2 \textgreater{}= 1000 (unidades nutriente / onza fuente *
+onza)
+
+400x1 + 250x2 \textgreater{}= 2000 (unidades nutriente / onza fuente *
+onza)
+
+200x1 + 200x2 \textgreater{}= 1500 (unidades nutriente / onza fuente *
+onza)
+
+x1,x2 \textgreater{}= 0
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{ortools}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}solver} \PY{k}{import} \PY{n}{pywraplp}
+        
+        \PY{c+c1}{\PYZsh{} Instantiate a mixed\PYZhy{}integer solver, naming it SolveIntegerProblem.}
+        \PY{n}{solver} \PY{o}{=} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SolveIntegerProblem}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{CBC\PYZus{}MIXED\PYZus{}INTEGER\PYZus{}PROGRAMMING}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Define the variables}
+        
+        \PY{c+c1}{\PYZsh{} x1 and x2 are integer non\PYZhy{}negative variables.}
+        \PY{n}{x1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 100x1 + 100x2 \PYZgt{}= 1000}
+        \PY{n}{constraint1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 400x1 + 250x2 \PYZgt{}= 2000}
+        \PY{n}{constraint2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{250}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 200x1 + 200x2 \PYZgt{}= 1500}
+        \PY{n}{constraint3} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{1500}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Min z= 0.375x1 + 0.50x2.}
+        \PY{n}{objective} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{0.375}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{0.50}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetMinimization}\PY{p}{(}\PY{p}{)}
+        
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Solve the problem and print the solution.\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{n}{result\PYZus{}status} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Solve}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The problem has an optimal solution.}
+        \PY{k}{assert} \PY{n}{result\PYZus{}status} \PY{o}{==} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{OPTIMAL}
+        
+        \PY{c+c1}{\PYZsh{} The solution looks legit (when using solvers other than}
+        \PY{c+c1}{\PYZsh{} GLOP\PYZus{}LINEAR\PYZus{}PROGRAMMING, verifying the solution is highly recommended!).}
+        \PY{k}{assert} \PY{n}{solver}\PY{o}{.}\PY{n}{VerifySolution}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of variables =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumVariables}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of constraints =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumConstraints}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} The objective value of the solution.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Optimal objective value = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{Value}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The value of each variable in the solution.}
+        \PY{n}{variable\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{variable\PYZus{}list}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{variable}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{variable}\PY{o}{.}\PY{n}{solution\PYZus{}value}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of variables = 2
+Number of constraints = 3
+Optimal objective value = 3
+x1 = 10
+x2 = 0
+
+    \end{Verbatim}
+
+    \subsubsection{\texorpdfstring{3- \textbf{THE FERGUSON
+COMPANY.}}{3- THE FERGUSON COMPANY.}}\label{the-ferguson-company.}
+
+\paragraph{Restricciones (por año):}\label{restricciones-por-auxf1o}
+
+\textbf{F.O:} Max z= 180000x1 + 20000x2 + 72000x3 + 80000x4 (valor
+presente)
+
+30000x1 + 12000x2 + 30000x3 + 20000x4 \textless{}= 65000
+
+40000x1 + 8000x2 + 20000x3 + 30000x4 \textless{}= 80000
+
+40000x1 + 0x2 + 20000x3 + 40000x4 \textless{}= 80000
+
+30000x1 + 4000x2 + 20000x3 + 10000x4 \textless{}= 50000
+
+x1 + x2 + x3 + x4 \textless{}= 1 (no sobrepasar el 100 en el mismo
+proyecto)
+
+xj \textgreater{}= 0
+
+j = 1,2,3,4
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{ortools}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}solver} \PY{k}{import} \PY{n}{pywraplp}
+        
+        \PY{c+c1}{\PYZsh{} Instantiate a mixed\PYZhy{}integer solver, naming it SolveIntegerProblem.}
+        \PY{n}{solver} \PY{o}{=} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SolveIntegerProblem}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{CBC\PYZus{}MIXED\PYZus{}INTEGER\PYZus{}PROGRAMMING}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Define the variables}
+        
+        \PY{c+c1}{\PYZsh{} x1 x2 x3 x4 are integer non\PYZhy{}negative variables.}
+        \PY{n}{x1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x3} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x4} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 30000x1 + 12000x2 + 30000x3 + 20000x4 \PYZlt{}= 65000}
+        \PY{n}{constraint1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{65000}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{30000}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{12000}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mi}{30000}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x4}\PY{p}{,} \PY{l+m+mi}{20000}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 40000x1 + 8000x2 + 20000x3 + 30000x4 \PYZlt{}= 80000}
+        \PY{n}{constraint2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{80000}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{40000}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{8000}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mi}{20000}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x4}\PY{p}{,} \PY{l+m+mi}{30000}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 40000x1 + 0x2 + 20000x3 + 40000x4 \PYZlt{}= 80000}
+        \PY{n}{constraint3} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{80000}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{40000}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mi}{20000}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x4}\PY{p}{,} \PY{l+m+mi}{400000}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 30000x1 + 4000x2 + 20000x3 + 10000x4 \PYZlt{}= 50000}
+        \PY{n}{constraint4} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{50000}\PY{p}{)}
+        \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{30000}\PY{p}{)}
+        \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{4000}\PY{p}{)}
+        \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mi}{20000}\PY{p}{)}
+        \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x4}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} x1 + x2 + x3 + x4 \PYZlt{}= 1 }
+        \PY{n}{constraint5} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Max z= 180000x1 + 20000x2 + 72000x3 + 80000x4}
+        \PY{n}{objective} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{180000}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mi}{20000}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mi}{72000}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x4}\PY{p}{,} \PY{l+m+mi}{80000}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetMaximization}\PY{p}{(}\PY{p}{)}
+        
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Solve the problem and print the solution.\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{n}{result\PYZus{}status} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Solve}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The problem has an optimal solution.}
+        \PY{k}{assert} \PY{n}{result\PYZus{}status} \PY{o}{==} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{OPTIMAL}
+        
+        \PY{c+c1}{\PYZsh{} The solution looks legit (when using solvers other than}
+        \PY{c+c1}{\PYZsh{} GLOP\PYZus{}LINEAR\PYZus{}PROGRAMMING, verifying the solution is highly recommended!).}
+        \PY{k}{assert} \PY{n}{solver}\PY{o}{.}\PY{n}{VerifySolution}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of variables =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumVariables}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of constraints =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumConstraints}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{if} \PY{n}{result\PYZus{}status} \PY{o}{==} \PY{n}{solver}\PY{o}{.}\PY{n}{OPTIMAL}\PY{p}{:}
+        
+            \PY{c+c1}{\PYZsh{} The objective value of the solution.}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Optimal objective value = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{Value}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} The value of each variable in the solution.}
+        
+        \PY{k}{else}\PY{p}{:}  \PY{c+c1}{\PYZsh{} No optimal solution was found.}
+            \PY{k}{if} \PY{n}{status} \PY{o}{==} \PY{n}{solver}\PY{o}{.}\PY{n}{FEASIBLE}\PY{p}{:}
+              \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A potentially suboptimal solution was found.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The solver could not solve the problem.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{variable\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{,} \PY{n}{x4}\PY{p}{]}
+        
+        
+        \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{variable\PYZus{}list}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{variable}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{variable}\PY{o}{.}\PY{n}{solution\PYZus{}value}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of variables = 4
+Number of constraints = 5
+Optimal objective value = 180000
+x1 = 1
+x2 = 0
+x3 = 0
+x4 = 0
+
+    \end{Verbatim}
+
+    \subsubsection{\texorpdfstring{4- \textbf{D \& M POWER PRODUCTS
+INC.}}{4- D \& M POWER PRODUCTS INC.}}\label{d-m-power-products-inc.}
+
+\paragraph{Restricciones:}\label{restricciones}
+
+\textbf{F.O:} Max z= 6x1 + 12.50x2 + 17.50x3 (utilidad unitaria en usd,
+valor unidad * und-hora
+
+0.020x1 + 0.25x2 + 0.04x3 \textless{}= 1 (horas / unidad) Hornear
+
+0.025x1 + 0.050x2 + 0.10x3 \textless{}= 1 Lavado y laminado
+
+0.040x1 + 0.50x2 + 0.10x3 \textless{}= 1 pulido
+
+x1, x2, x3 \textgreater{}= 0
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{ortools}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}solver} \PY{k}{import} \PY{n}{pywraplp}
+        
+        \PY{c+c1}{\PYZsh{} Instantiate a mixed\PYZhy{}integer solver, naming it SolveIntegerProblem.}
+        \PY{n}{solver} \PY{o}{=} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SolveIntegerProblem}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{CBC\PYZus{}MIXED\PYZus{}INTEGER\PYZus{}PROGRAMMING}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Define the variables}
+        
+        \PY{c+c1}{\PYZsh{} x1 x2 x3 are integer non\PYZhy{}negative variables.}
+        \PY{n}{x1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x3} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 0.020x1 + 0.25x2 + 0.04x3 \PYZlt{}= 1}
+        \PY{n}{constraint1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{0.020}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{)}
+        \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mf}{0.04}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 0.025x1 + 0.050x2 + 0.10x3 \PYZlt{}= 1}
+        \PY{n}{constraint2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{0.025}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{0.050}\PY{p}{)}
+        \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mf}{0.10}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 0.040x1 + 0.50x2 + 0.10x3 \PYZlt{}= 1}
+        \PY{n}{constraint3} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{0.040}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{0.50}\PY{p}{)}
+        \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mf}{0.10}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Max z= 6x1 + 12.50x2 + 17.50x3}
+        \PY{n}{objective} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mf}{6.00}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{l+m+mf}{12.50}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x3}\PY{p}{,} \PY{l+m+mf}{17.50}\PY{p}{)}
+        \PY{n}{objective}\PY{o}{.}\PY{n}{SetMaximization}\PY{p}{(}\PY{p}{)}
+        
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Solve the problem and print the solution.\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{n}{result\PYZus{}status} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Solve}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The problem has an optimal solution.}
+        \PY{k}{assert} \PY{n}{result\PYZus{}status} \PY{o}{==} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{OPTIMAL}
+        
+        \PY{c+c1}{\PYZsh{} The solution looks legit (when using solvers other than}
+        \PY{c+c1}{\PYZsh{} GLOP\PYZus{}LINEAR\PYZus{}PROGRAMMING, verifying the solution is highly recommended!).}
+        \PY{k}{assert} \PY{n}{solver}\PY{o}{.}\PY{n}{VerifySolution}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of variables =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumVariables}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of constraints =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumConstraints}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} The objective value of the solution.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Optimal objective value = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{Value}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The value of each variable in the solution.}
+        \PY{n}{variable\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{variable\PYZus{}list}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{variable}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{variable}\PY{o}{.}\PY{n}{solution\PYZus{}value}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of variables = 3
+Number of constraints = 3
+Optimal objective value = 175
+x1 = 0
+x2 = 0
+x3 = 10
+
+    \end{Verbatim}
+
+    \subsubsection{\texorpdfstring{5- \textbf{B \& Z BREWING
+COMPANY.}}{5- B \& Z BREWING COMPANY.}}\label{b-z-brewing-company.}
+
+\paragraph{Restricciones:}\label{restricciones}
+
+\textbf{F.O:} Min z= 464x11 + 513x12 + 654x13 + 867x14 + 352x21 + 416x22
++ 690x3 + 791x24 + 995x31 + 682x32 + 388x33 + 685x34
+
+\textbf{Rutas:}
+
+x11 + x12 + x13 + x14 \textless{}= 75 (Boulilder a Colorado)
+
+x21 + x22 + x23 + x24 \textless{}= 125 (Mineapolis a Minessota)
+
+x31 + x32 + x33 + x34 \textless{}= 100 (Olympia a Washington)
+
+x11, x12, x13, x14, x21, x22, x23, x24, x31, x32, x33, x34,
+\textgreater{}= 0
+
+\textbf{Demanda}
+
+x11 + x21 + x31 = 80 (San Diego, California)
+
+x12 + x22 + x32 = 65 (Pravo, Utah)
+
+x13 + x23 + x33 = 70 (Albuquerque, Nuevo México)
+
+x14 + x24 + x34 = 85 (Lincoln, nebraska)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{from} \PY{n+nn}{ortools}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}solver} \PY{k}{import} \PY{n}{pywraplp}
+         
+         \PY{c+c1}{\PYZsh{} Instantiate a mixed\PYZhy{}integer solver, naming it SolveIntegerProblem.}
+         \PY{n}{solver} \PY{o}{=} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SolveIntegerProblem}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{CBC\PYZus{}MIXED\PYZus{}INTEGER\PYZus{}PROGRAMMING}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Define the variables}
+         
+         \PY{c+c1}{\PYZsh{} x11 x12 x13 x14 x21 x22 x23 x24 x31 x32 x33 x34  are integer non\PYZhy{}negative variables.}
+         \PY{n}{x11} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x11}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x12} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x13} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x13}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x14} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x21} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x21}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x22} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x22}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x23} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x23}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x24} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x31} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x31}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x32} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x33} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x33}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x34} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{IntVar}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x34}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} x11 + x12 + x13 + x14 \PYZlt{}= 75 (Boulilder a Colorado)}
+         \PY{n}{constraint1} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{)}
+         \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x11}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x12}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x13}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint1}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x14}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} x21 + x22 + x23 + x24 \PYZlt{}= 125 (Mineapolis a Minessota)}
+         \PY{n}{constraint2} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{125}\PY{p}{)}
+         \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x21}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x22}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x23}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint2}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x24}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} x31 + x32 + x33 + x34 \PYZlt{}= 100 (Olympia a Washington) }
+         \PY{n}{constraint3} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{solver}\PY{o}{.}\PY{n}{infinity}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x31}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x32}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x33}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint3}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x34}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} x11 + x21 + x31 = 80 (San Diego, California)}
+         \PY{n}{constraint4} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{80}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{)}
+         \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x11}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x21}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint4}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x31}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} x12 + x22 + x32 = 65 (Pravo, Utah)}
+         \PY{n}{constraint5} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{65}\PY{p}{,} \PY{l+m+mi}{65}\PY{p}{)}
+         \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x12}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x22}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint5}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x32}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} x13 + x23 + x33 = 70 (Albuquerque, Nuevo México)}
+         \PY{n}{constraint6} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{,} \PY{l+m+mi}{70}\PY{p}{)}
+         \PY{n}{constraint6}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x13}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint6}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x23}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint6}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x33}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} x14 + x24 + x34 = 85 (Lincoln, nebraska)}
+         \PY{n}{constraint7} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Constraint}\PY{p}{(}\PY{l+m+mi}{85}\PY{p}{,} \PY{l+m+mi}{85}\PY{p}{)}
+         \PY{n}{constraint7}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x14}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint7}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x24}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{constraint7}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x34}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Min z= 464x11 + 513x12 + 654x13 + 867x14 + 352x21 + 416x22 }
+             \PY{c+c1}{\PYZsh{}+ 690x3 + 791x24 + 995x31 + 682x32 + 388x33 + 685x34}
+         \PY{n}{objective} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x11}\PY{p}{,} \PY{l+m+mi}{464}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x12}\PY{p}{,} \PY{l+m+mi}{513}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x13}\PY{p}{,} \PY{l+m+mi}{654}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x14}\PY{p}{,} \PY{l+m+mi}{867}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x21}\PY{p}{,} \PY{l+m+mi}{352}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x22}\PY{p}{,} \PY{l+m+mi}{416}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x23}\PY{p}{,} \PY{l+m+mi}{690}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x24}\PY{p}{,} \PY{l+m+mi}{791}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x31}\PY{p}{,} \PY{l+m+mi}{995}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x32}\PY{p}{,} \PY{l+m+mi}{682}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x33}\PY{p}{,} \PY{l+m+mi}{388}\PY{p}{)}
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetCoefficient}\PY{p}{(}\PY{n}{x34}\PY{p}{,} \PY{l+m+mi}{685}\PY{p}{)}
+         
+         \PY{n}{objective}\PY{o}{.}\PY{n}{SetMinimization}\PY{p}{(}\PY{p}{)}
+         
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Solve the problem and print the solution.\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{status} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Solve}\PY{p}{(}\PY{p}{)}
+         \PY{n}{status\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}
+         \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{OPTIMAL}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Optimal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{FEASIBLE}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feasible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{INFEASIBLE}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Infeasible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{UNBOUNDED}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unbounded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{ABNORMAL}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Abnormal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{NOT\PYZus{}SOLVED}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not solved}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{\PYZcb{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{status\PYZus{}dict}\PY{p}{[}\PY{n}{status}\PY{p}{]}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{status} \PY{o+ow}{in} \PY{p}{(}\PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{OPTIMAL}\PY{p}{,} \PY{n}{pywraplp}\PY{o}{.}\PY{n}{Solver}\PY{o}{.}\PY{n}{FEASIBLE}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{solver}\PY{o}{.}\PY{n}{VerifySolution}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of variables =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumVariables}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of constraints =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{.}\PY{n}{NumConstraints}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n}{status} \PY{o}{==} \PY{n}{solver}\PY{o}{.}\PY{n}{OPTIMAL}\PY{p}{:}
+         
+             \PY{c+c1}{\PYZsh{} The objective value of the solution.}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Optimal objective value = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{solver}\PY{o}{.}\PY{n}{Objective}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{Value}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} The value of each variable in the solution.}
+         
+         \PY{k}{else}\PY{p}{:}  \PY{c+c1}{\PYZsh{} No optimal solution was found.}
+             \PY{k}{if} \PY{n}{status} \PY{o}{==} \PY{n}{solver}\PY{o}{.}\PY{n}{FEASIBLE}\PY{p}{:}
+               \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A potentially suboptimal solution was found.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+               \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The solver could not solve the problem.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{variable\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{x11}\PY{p}{,} \PY{n}{x12}\PY{p}{,} \PY{n}{x13}\PY{p}{,} \PY{n}{x14}\PY{p}{,} \PY{n}{x21}\PY{p}{,} \PY{n}{x22}\PY{p}{,} \PY{n}{x23}\PY{p}{,} \PY{n}{x24}\PY{p}{,} \PY{n}{x31}\PY{p}{,} \PY{n}{x32}\PY{p}{,} \PY{n}{x33}\PY{p}{,} \PY{n}{x34}\PY{p}{]}
+         
+         
+         \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{variable\PYZus{}list}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{variable}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{variable}\PY{o}{.}\PY{n}{solution\PYZus{}value}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Status = Optimal
+Number of variables = 12
+Number of constraints = 7
+Optimal objective value = 152535
+x11 = 0
+x12 = 20
+x13 = 0
+x14 = 55
+x21 = 80
+x22 = 45
+x23 = 0
+x24 = 0
+x31 = 0
+x32 = 0
+x33 = 70
+x34 = 30
+
+    \end{Verbatim}
+
+    \subsubsection{\texorpdfstring{6- \textbf{La compañía
+RecordSong}}{6- La compañía RecordSong}}\label{la-compauxf1uxeda-recordsong}
+
+\paragraph{Solución:}\label{soluciuxf3n}
+
+CD1: 5, 6 y 8 (27MB) CD2: 1, 2, 3, 4 Y 7 (28MB)
+
+    \subsubsection{\texorpdfstring{7- \textbf{Secuenciamiento de
+trabajo}}{7- Secuenciamiento de trabajo}}\label{secuenciamiento-de-trabajo}
+
+respuesta sacada de:
+\href{https://books.google.com.co/books?id=3oHztjMSuL8C\&pg=PA369\&lpg=PA369\&dq=utiliza\%20una\%20sola\%20m\%C3\%A1quina\%20para\%20procesar\%20tres\%20trabajos.\%20taha\&source=bl\&ots=nNCC9b6NBM\&sig=qw95O8lgukZwb-2QG3vqQdJN2hY\&hl=es-419\&sa=X\&ved=2ahUKEwjIrfSMj83eAhXNoFMKHb1XAToQ6AEwAnoECAgQAQ\&fbclid=IwAR20m6S9G_2GUK4q4cRcgOgwWTggyRpDtu2wzyaoyqaHf_0CwwxB71Z8eBI\#v=onepage\&q=utiliza\%20una\%20sola\%20m\%C3\%A1quina\%20para\%20procesar\%20tres\%20trabajos.\%20taha\&f=false}{TahaBook}
+
+\paragraph{Restricciones:}\label{restricciones}
+
+Yij = 1 si i es anterior a j; 0 si j es anterior a i,
+
+MYij + (Xi - Xj) \textgreater{}= pjYM(1-Yij) + (Xj - Xi) \textgreater{}=
+Pi
+
+Fecha de vencimiento:
+
+Xj + Pj + Sj = dj (Fecha de vencimiento para el trabajo j)
+
+Sj = variable no restringida.
+
+Si se cumple la fecha de entrega (s\textgreater{}= 0)
+
+Sj = +Sj - (-Sj) (ambas \textgreater{}= 0)
+
+Entonces, reemplazando sj en Fecha de vencimiento:
+
+Xj + (Sj+) - (Sj-) = dj - Pi
+
+\paragraph{F.O: Min \textless{}= 19(S1-) + 12(s2-) +
+34(s3-)}\label{f.o-min-19s1--12s2--34s3-}
+
+x1 -x2 + My12 \textgreater{}= 20
+
+-x1 + x2 - My12 \textgreater{}= 5 -M
+
+x1 - x3 + My13 \textgreater{}= 15
+
+-x1 + x3 - My13 \textgreater{}= 5 - M
+
+x2 - x3 + My23 \textgreater{}= 15
+
+-x2 + x3 + My23 \textgreater{}= 20 - M
+
+x1 + (s1+) - (s2-) = 25 - 5
+
+x2 + (s2+) - (s2-) = 22 - 20
+
+x3 + (s3+) - (s3-) = 35 - 15
+
+x1,x2,x3, s1, s2, s3 \textgreater{}= 0
+
+y12, y13, y23 = (0, 1)
+
+\paragraph{Solución Óptima:}\label{soluciuxf3n-uxf3ptima}
+
+X1 = 20, X2 = 0, x3 = 25. Trabajo 3 comienza en 25.
+
+Secuencia óptima: 2 -\textgreater{} 1 -\textgreater{} 3
+
+Terminar el trabajo 2 en tiempo 20 y el trabajo 1 en el tiempo 25.
+
+    \subsubsection{\texorpdfstring{8- \textbf{Ramificación y
+acotamiento}}{8- Ramificación y acotamiento}}\label{ramificaciuxf3n-y-acotamiento}
+
+\paragraph{1)}\label{section}
+
+Max z=20x1+10x2+25x3+20x4
+
+S.A.
+
+1x1+1x2+1x3+2x4≤12
+
+3x1+1x2+2x3+2x4≤20
+
+1x1+2x2+5x3+3x4≤30
+
+xj≥0 , entero
+
+\paragraph{Solución:}\label{soluciuxf3n}
+
+z=195 x1=3 x2=1 x3=5 x4=0
+
+\paragraph{2)}\label{section-1}
+
+Max z=3x1+4x2+2x3+1x4+2x5
+
+S.A.
+
+2x1-1x2+1x3+1x4≤3
+
+-x1+3x2+1x3-2x4≤2
+
+2x1+1x2-1x3+3x5≤1
+
+xj≥0 , binario
+
+\paragraph{Solución:}\label{soluciuxf3n-1}
+
+z = 7 X1 = 0 X2 = 1 X3 = 1 X4 = 1 X5 = 0
+
+\paragraph{3)}\label{section-2}
+
+Max z=5x1+2x2+2x3+1y
+
+S.A.
+
+350x1+400x2+1y≤400
+
+350x1+210x3+1y≤2
+
+y≥0,
+
+x1, x2, x3≥0 , entero
+
+\paragraph{Solución:}\label{soluciuxf3n-2}
+
+X2\textless{}=1 z = 4 X1 = 0 X2 = 1 X3 = 0 y = 2
+
+\paragraph{4)}\label{section-3}
+
+Max z=2x1+1x2
+
+S.A.
+
+x1+x2 ≤5
+
+-x1+x2 ≤0
+
+6x1+2x2 ≤21
+
+x1,x2≥0 , entero
+
+\paragraph{Solución:}\label{soluciuxf3n-3}
+
+z = 7
+
+X1 = 3
+
+X2 = 1
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
